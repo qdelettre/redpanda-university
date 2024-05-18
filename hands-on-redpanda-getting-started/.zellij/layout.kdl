@@ -1,0 +1,23 @@
+layout {
+    pane split_direction="vertical" {
+        pane command="fish"
+        pane split_direction="horizontal" {
+            rpk {
+                args "exec" "redpanda" "rpk" "topic" "produce" "song_likes"
+            }
+            rpk {
+                args "exec" "redpanda" "rpk" "topic" "consume" "song_likes"
+            }
+            rpk {
+                args "exec" "redpanda" "rpk" "topic" "consume" "greetings"
+            }
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+    pane_template name="rpk" {
+        command "docker-compose"
+        start_suspended true
+    }
+}
