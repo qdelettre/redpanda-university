@@ -1,0 +1,17 @@
+layout {
+    pane split_direction="vertical" {
+        pane command="fish"
+        pane split_direction="horizontal" {
+            rpk {
+                args "exec" "-ti" "redpanda-1" "rpk" "topic" "consume" "purchases"
+            }
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+    pane_template name="rpk" {
+        command "docker"
+        start_suspended true
+    }
+}
